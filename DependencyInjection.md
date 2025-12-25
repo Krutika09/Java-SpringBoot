@@ -53,9 +53,11 @@ Let’s understand slowly.
 
 ```java
 class Controller {
-    Service service = new Service();  // ❌
+    Service service = new Service();  // Service object
 }
 ```
+* `Service` is the **class**
+* `service` is the **object (instance)** of that class
 
 What’s happening?
 
@@ -73,10 +75,10 @@ Problems:
 ## 5️⃣ With Dependency Injection (GOOD WAY)
 
 ```java
-class Controller {
+class Controller {  // Class
     Service service;
 
-    Controller(Service service) {
+    Controller(Service service) { // Constructor
         this.service = service;
     }
 }
