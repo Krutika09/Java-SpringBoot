@@ -78,6 +78,106 @@ GET http://localhost:8080/studentdb/101
 
 ## 🟢 STEP 3: Controller Layer
 
+## This Line 👇
+
+```java
+StudentDBService studentDBService;
+```
+
+### What is this?
+
+This is a **reference variable of StudentDBService class**.
+
+Meaning:
+
+> It is an **object holder** (container) that will hold the StudentDBService object.
+
+Just like:
+
+```java
+Car myCar;
+```
+
+means `myCar` will hold a Car object.
+Here:
+
+```java
+StudentDBService studentDBService;
+```
+
+means `studentDBService` will hold a StudentDBService object.
+
+---
+
+## This Part 👇
+
+```java
+public StudentDBController(StudentDBService studentDBService) {
+    this.studentDBService = studentDBService;
+}
+```
+
+### This is called **Constructor Injection**
+
+Spring automatically sends the **StudentDBService object** into the controller when your project starts.
+
+### Step-by-step what happens:
+
+1. Spring sees this:
+
+   ```java
+   @RestController
+   public class StudentDBController
+   ```
+
+2. Spring says:
+
+   > “I need to create an object of StudentDBController.”
+
+3. But your controller **needs StudentDBService** in its constructor:
+
+   ```java
+   public StudentDBController(StudentDBService studentDBService)
+   ```
+
+4. So Spring automatically creates the **StudentDBService object** and passes it here.
+
+5. Then this line:
+
+   ```java
+   this.studentDBService = studentDBService;
+   ```
+
+   stores that service object inside the controller.
+
+So now your controller can use:
+
+```java
+studentDBService.getStudentDatabase(...)
+studentDBService.createStudentDatabase(...)
+```
+
+---
+
+## Why do we do this?
+
+Because:
+
+* Controller should NOT create Service objects using `new`
+* Spring should manage everything (Dependency Injection)
+* This makes code clean, reusable, and testable
+
+---
+
+## In Interview Language 💼
+
+You can say:
+
+> This is constructor-based dependency injection.
+> Spring injects the StudentDBService bean into the StudentDBController so that the controller can use service layer methods without creating the object manually.
+
+---
+
 📄 **StudentDBController.java**
 
 ```java
